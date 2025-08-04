@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js"
+    "build": "tsc --w",
+    "dev": "nodemon ./dist/index.js --exec babel-node -e js",
+    "start": "tsc && ts-node ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
