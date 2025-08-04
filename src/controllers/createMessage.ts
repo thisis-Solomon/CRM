@@ -1,6 +1,6 @@
-export type Enviroment = 'development' | 'staging' | "production"
-
-export default class Messenger{
+namespace Messagespace{
+    export type Enviroment = 'development' | 'staging' | "production"
+    export class Messenger{
     port: number;
     enviroment: Enviroment;
 
@@ -13,3 +13,6 @@ export default class Messenger{
         return `Node and express server is running on port ${this.port} in ${this.enviroment}`
     }
 }
+}
+
+export default Messagespace
