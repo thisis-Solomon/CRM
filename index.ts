@@ -1,14 +1,18 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import routes from './src/routes/crmRoutes.js';
 
+import Messenger from './src/controllers/createMessage';
+
 const app = express();
-const PORT = 3000;
+const PORT: number = 3000;
 
 // mongoose connection
+const database: string = 'mongodb://localhost/CRMdb'
+
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/CRMdb');
+mongoose.connect(database);
 
 // bodyparser setup
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,10 +23,12 @@ routes(app);
 // serving static files
 app.use(express.static('public'));
 
-app.get('/', (req, res) =>
-    res.send(`Node and express server is running on port ${PORT}`)
+const message = new Messenger(PORT)
+
+app.get('/', (req:Request, res:Response) =>
+    res.send(message.messagePrint())
 );
 
 app.listen(PORT, () =>
-    console.log(`your server is running on port ${PORT}`)
+    console.log(message.messagePrint())
 );
